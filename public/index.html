@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CS WhatsApp Group Signup</title>
+</head>
+<body>
+  <h1>Join the CS WhatsApp Group</h1>
+  <form id="signupForm">
+    <label>
+      First Name:<br />
+      <input type="text" name="firstName" required />
+    </label><br /><br />
+    <label>
+      Last Name:<br />
+      <input type="text" name="lastName" required />
+    </label><br /><br />
+    <label>
+      University Email (@city.ac.uk):<br />
+      <input type="email" name="email" pattern=".+@city\.ac\.uk" required />
+    </label><br /><br />
+    <button type="submit">Request Access</button>
+  </form>
+
+  <p id="message"></p>
+
+  <script>
+    const form = document.getElementById('signupForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      message.textContent = 'Sending verification email...';
+
+      try {
+        const res = await fetch('/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        const result = await res.json();
+
+        if (res.ok) {
+          message.textContent = 'Verification email sent! Check your inbox.';
+          form.reset();
+        } else {
+          message.textContent = 'Error: ' + (result.error || 'Unknown error');
+        }
+      } catch (error) {
+        message.textContent = 'Error sending request.';
+      }
+    });
+  </script>
+</body>
+</html>
