@@ -79,7 +79,7 @@ router.get("/:token", (req, res) => {
   return res.send(`
     <h1>Email Verified ✅</h1>
     <p>Welcome, ${tokens[token].firstName}! You can now join the WhatsApp group:</p>
-    <a href="https://chat.whatsapp.com/JNOvV8kdNR61vdkNZWTny9" target="_blank">Join WhatsApp Group</a>
+    <a href="https://chat.whatsapp.com/JENi7yzZA5T4wFDWIEqb03" target="_blank">Join WhatsApp Group</a>
   `);
 });
 
