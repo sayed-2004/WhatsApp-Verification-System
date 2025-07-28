@@ -48,7 +48,7 @@
         const result = await res.json();
 
         if (res.ok) {
-          message.textContent = 'Verification email sent! Please check your inbox<br>(and your spam or junk folder just in case).';
+          message.innerHTML = 'Verification email sent! Please check your inbox<br>(and your spam or junk folder just in case).';
           form.reset();
         } else {
           message.textContent = 'Error: ' + (result.error || 'Unknown error');
